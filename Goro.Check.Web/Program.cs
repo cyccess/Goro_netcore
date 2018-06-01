@@ -19,6 +19,9 @@ namespace Goro.Check.Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseUrls("http://*:8002")
+                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
     }
