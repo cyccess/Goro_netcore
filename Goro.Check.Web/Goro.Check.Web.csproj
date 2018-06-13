@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Goro.Check.Data\Goro.Check.Data.csproj" />
     <ProjectReference Include="..\Goro.Check.Service\Goro.Check.Service.csproj" />
     <ProjectReference Include="..\Goro.Check\Goro.Check.csproj" />
   </ItemGroup>

@@ -1,7 +1,4 @@
 import HelloWorld from '@/components/HelloWorld'
-import Account from '@/components/Account'
-import SalesOrder from '@/components/SalesOrder'
-import SalesOrderDetail from '@/components/SalesOrderDetail'
 
 export default [
   {
@@ -11,16 +8,16 @@ export default [
   }, {
     path: '/account',
     name: 'Account',
-    component: Account
+    component: resolve => require(['@/components/Account.vue'], resolve),
   }, {
     path: '/salesOrder',
     name: 'SalesOrder',
-    component: SalesOrder,
+    component: resolve => require(['@/components/SalesOrder.vue'], resolve),
     meta: {title: '待审核销售订单', requiresAuth: false}
   }, {
     path: '/salesOrderDetail',
     name: 'SalesOrderDetail',
-    component: SalesOrderDetail,
+    component: resolve => require(['@/components/SalesOrderDetail.vue'], resolve),
     meta: {title: '待审核销售订单详情', requiresAuth: false}
   }
 ]

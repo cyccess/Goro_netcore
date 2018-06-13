@@ -9,6 +9,8 @@ namespace Goro.Check.Data
 {
     public interface IRepository 
     {
+        CheckDbContext Db { get; }
+
         /// <summary>
         /// 通过Reload方法刷新实体
         /// </summary>

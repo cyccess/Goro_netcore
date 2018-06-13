@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Goro.Check.Data\Goro.Check.Data.csproj" />
+    <ProjectReference Include="..\Goro.Check\Goro.Check.csproj" />
+  </ItemGroup>
+
 </Project>

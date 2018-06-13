@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
+using Microsoft.Extensions.Caching.Memory;
+using Goro.Check.Cache;
+using Goro.Check.Data;
+using Goro.Check.Service;
 
 namespace Goro.Check.Web
 {
@@ -26,10 +30,12 @@ namespace Goro.Check.Web
         {
             WebConfig.ConnectionString = Configuration.GetConnectionString("SqlServerConnection");
 
-            WebConfig.APPID = Configuration["WxConfig:APPID"];
-            WebConfig.APPSECRET = Configuration["WxConfig:APPSECRET"];
-            WebConfig.MCHID = Configuration["WxConfig:MCHID"];
-            WebConfig.KEY = Configuration["WxConfig:KEY"];
+            WebConfig.WebHost = Configuration.GetConnectionString("WebHost");
+
+            WebConfig.APPID = Configuration["WechatConfig:APPID"];
+            WebConfig.APPSECRET = Configuration["WechatConfig:APPSECRET"];
+            WebConfig.MCHID = Configuration["WechatConfig:MCHID"];
+            WebConfig.KEY = Configuration["WechatConfig:KEY"];
 
             services.AddSwaggerGen(c =>
             {
@@ -45,6 +51,18 @@ namespace Goro.Check.Web
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddMemoryCache();
+
+            services.AddSingleton<IMemoryCache>(factory =>
+            {
+                var cache = new MemoryCache(new MemoryCacheOptions());
+                CacheService.Init(cache);
+                return cache;
+            });
+            services.AddSingleton<ICacheService, MemoryCacheService>();
+            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IApiService, ApiService>();
 
             services.AddMvc().AddJsonOptions(op => op.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
         }

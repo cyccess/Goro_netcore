@@ -9,6 +9,11 @@ namespace Goro.Check
         public static string AppBasePath = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
+        /// 本网站域名
+        /// </summary>
+        public static string WebHost = string.Empty;
+
+        /// <summary>
         /// 链接字符串
         /// </summary>
         public static string ConnectionString = string.Empty;

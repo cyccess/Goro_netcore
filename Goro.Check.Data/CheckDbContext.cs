@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Goro.Check.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Goro.Check.Data
 
         }
 
-        //public DbSet<MessagePool> MessagePools { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
 
     }
 }
