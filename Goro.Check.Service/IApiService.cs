@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,6 @@ namespace Goro.Check.Service
         /// </summary>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        Task<string[]> GetSalesReturnNotice(string phoneNumber);
+        DataTable GetSalesReturnNotice(string phoneNumber);
     }
 }

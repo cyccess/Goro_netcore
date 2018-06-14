@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Goro.Check.Web.Controllers
 {
     [Produces("application/json")]
- 
+
     public class ApiController : Controller
     {
         private IApiService apiService;
@@ -23,9 +23,9 @@ namespace Goro.Check.Web.Controllers
         {
             await apiService.GetUserInfo("13011111111", 15830);
 
-            await apiService.GetSalesReturnNotice("13011111111");
+            var res = apiService.GetSalesReturnNotice("13011111111");
 
-            return null;
+            return Json(res);
         }
 
 

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Goro.Check.Cache;
 using Goro.Check.Data;
 using Goro.Check.Service;
+using Newtonsoft.Json.Serialization;
 
 namespace Goro.Check.Web
 {
@@ -64,7 +65,7 @@ namespace Goro.Check.Web
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IApiService, ApiService>();
 
-            services.AddMvc().AddJsonOptions(op => op.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+            services.AddMvc().AddJsonOptions(op => op.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

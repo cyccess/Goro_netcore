@@ -22,11 +22,11 @@ namespace Goro.Check.Service
 
         public async Task GetUserInfo(string phoneNumber, int groupId)
         {
-            var userInfo = await Repository.Db.UserInfo.SingleOrDefaultAsync(u => u.FPhoneNumber == phoneNumber && u.FUserGroupID == groupId);
-
+            var userInfo = await Repository.Db.UserInfo
+                .SingleOrDefaultAsync(u => u.FPhoneNumber == phoneNumber && u.FUserGroupID == groupId);
         }
 
-        public Task<string[]> GetSalesReturnNotice(string phoneNumber)
+        public DataTable GetSalesReturnNotice(string phoneNumber)
         {
             SqlParameter[] sqlParameter = new SqlParameter[]
             {
@@ -52,7 +52,7 @@ namespace Goro.Check.Service
             string sql = $"select * from tm_v_SalesReturnNotice where FBillNo in({fBillNo}) ";
             var dt1 = SqlHelper.ExecuteDataTable(CommandType.Text, sql, sqlParameter1);
 
-            throw new NotImplementedException();
+            return dt1;
         }
     }
 }
