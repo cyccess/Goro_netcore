@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using Swashbuckle.AspNetCore.Swagger;
-using System.Reflection;
-using Microsoft.Extensions.Caching.Memory;
-using Goro.Check.Cache;
+﻿using Goro.Check.Cache;
 using Goro.Check.Data;
 using Goro.Check.Service;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Goro.Check.Web
 {
@@ -31,7 +28,7 @@ namespace Goro.Check.Web
         {
             WebConfig.ConnectionString = Configuration.GetConnectionString("SqlServerConnection");
 
-            WebConfig.WebHost = Configuration.GetConnectionString("WebHost");
+            WebConfig.WebHost = Configuration["WebHost"].TrimEnd('/');
 
             WebConfig.APPID = Configuration["WechatConfig:APPID"];
             WebConfig.APPSECRET = Configuration["WechatConfig:APPSECRET"];

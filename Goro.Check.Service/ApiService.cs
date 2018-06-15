@@ -23,6 +23,7 @@ namespace Goro.Check.Service
         public async Task GetUserInfo(string phoneNumber, int groupId)
         {
             var userInfo = await Repository.Db.UserInfo
+                .AsNoTracking()
                 .SingleOrDefaultAsync(u => u.FPhoneNumber == phoneNumber && u.FUserGroupID == groupId);
         }
 

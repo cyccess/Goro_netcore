@@ -7,29 +7,16 @@
       <div class="info-text">日期：</div>
       <div class="info-text">客户：</div>
       <div class="info-text">备注：</div>
-    </div>
+      <hr>
+      <div class="info-text">物料代码</div>
+      <div class="info-text">物料名称</div>
+      <div class="info-text">规格型号</div>
+      <div class="info-text">数量</div>
 
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>序号</th>
-          <th>物料代码</th>
-          <th>物料名称</th>
-          <th>规格型号</th>
-          <th>数量</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(item,index) in list" :key="index">
-          <td>{{item.id+index}}</td>
-          <td>{{item.code + index}}</td>
-          <td>{{item.name+index}}</td>
-          <td>{{item.modal}}</td>
-          <td>{{item.num}}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="info-text">单价</div>
+      <div class="info-text">金额</div>
+      <div class="info-text">信用额度</div>
+
     </div>
 
     <div class="btn-wrapper">

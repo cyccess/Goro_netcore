@@ -2,7 +2,7 @@
   <div class="sales-box">
     <scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller" :no-data-text="noData">
       <div class="sales-wrapper">
-        <div class="header">待(工艺/交期/信用额度)审核销售订单</div>
+        <div class="header">信用额度审核</div>
         <table class="table">
           <thead>
           <tr>
