@@ -6,10 +6,9 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
   data () {
     return {
-      msg: 'Goro'
+      msg: '欢迎登录'
     }
   }
 }

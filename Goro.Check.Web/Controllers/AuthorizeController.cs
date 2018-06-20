@@ -21,7 +21,10 @@ namespace Goro.Check.Web.Controllers
         public async Task<IActionResult> WxRedirect(string code)
         {
             LoggerHelper.Info("微信登录code:" + code);
-            var token = await HttpHelper.GetAsync<WechatToken>($"https://api.weixin.qq.com/sns/oauth2/access_token?appid={WebConfig.APPID}&secret={WebConfig.APPSECRET}&code={code}&grant_type=authorization_code");
+
+            string url = "https://" + $"api.weixin.qq.com/sns/oauth2/access_token?appid={WebConfig.APPID}&secret={WebConfig.APPSECRET}&code={code}&grant_type=authorization_code";
+
+            var token = await HttpHelper.GetAsync<WechatToken>(url);
 
             LoggerHelper.Info("json:" + token.openid);
             Cache.CacheService.Set(token.openid, token);

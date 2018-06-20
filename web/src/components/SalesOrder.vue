@@ -1,26 +1,14 @@
 <template>
   <div class="sales-box">
     <scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller" :no-data-text="noData">
-      <div class="sales-wrapper">
-        <div class="header">信用额度审核</div>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>序号</th>
-            <th>销售订单号</th>
-            <th>客户</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr @click="detail(index)" v-for="(item,index) in list" :key="index">
-            <td>{{item.id}}</td>
-            <td>{{item.orderNo}}</td>
-            <td>{{item.customer}}</td>
-          </tr>
-          </tbody>
-        </table>
+      <div class="sales-list">
+        <div @click="detail(index)" class="sales-item" v-for="(item,index) in list" :key="index">
+          <div class="bill-no vux-1px-b">单据编号：{{item.fBillNo}}</div>
+          <div class="custom">
+            {{item.fCustName}}
+          </div>
+        </div>
       </div>
-
     </scroller>
   </div>
 </template>
@@ -30,11 +18,7 @@
       return {
         page:0,
         noData:'',
-        list: [
-          {id: 1, orderNo: '20180511001', customer: '大客户1'},
-          {id: 2, orderNo: '20180511002', customer: '大客户2'},
-          {id: 3, orderNo: '20180511003', customer: '大客户3'}
-        ]
+        list: []
       }
     },
     methods: {
@@ -49,9 +33,8 @@
           done();
           return;
         }
-        this.brandId = this.$route.query.brandId || 0;
         this.page += 1;
-        let res = await this.$http.post('/api/Sell/List', {page: this.page, brandId: this.brandId});
+        let res = await this.$http.post('/api/SalesOrders', {page: this.page});
 
         if (res.code === 100) {
           if (res.data.length < 10) {
@@ -69,27 +52,37 @@
         }
       },
       detail(index) {
-        let id = this.list[index].id;
-        this.$router.push({path: '/salesOrderDetail', query: {id: id}});
+        let fBillNo = this.list[index].fBillNo;
+        this.$router.push({path: '/salesOrderDetail', query: {billNo: fBillNo}});
       }
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
   .sales-box {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     width: 100%;
-  }
-  .sales-wrapper{
-    padding: .875rem;
-    font-size: .875rem;
+    background-color:#f1f1f1;
   }
 
-  .header {
-    margin-bottom: 1.2rem;
-    color:#3296FA;
+  .sales-list{
+
+  }
+  .sales-item{
+    margin-top: .56667rem;
+    padding-left: .75rem;
+    background-color: #fff;
+    font-size: .87333rem;
+    .bill-no{
+      height: 3.06667rem;
+      line-height: 3.06667rem;
+      margin-right: .4rem;
+    }
+    .custom{
+      padding: .93333rem 0;
+    }
   }
 </style>
